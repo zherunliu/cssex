@@ -1,5 +1,14 @@
 :root {
-  font-family: rico_1, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: rico_1, "Maple Mono", "Segoe UI", Tahoma, Geneva, Verdana,
+    sans-serif;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 /* 自定义变量，需要限定类型为角度 */
@@ -10,7 +19,7 @@
 }
 
 .card {
-  margin: 200px auto;
+  margin: 0 auto;
   padding: 2em;
   width: 300px;
   background-color: rgb(249, 239, 225);
