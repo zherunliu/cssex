@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  font-family: "Maple Mono", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  .form__input {
+    width: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0.8em;
+    background: none;
+    border: 2px solid rgb(186, 186, 186);
+    border-radius: 0.5em;
+    outline: none;
+    &:hover {
+      border-color: rgb(113, 113, 113);
+      & ~ .form__label {
+        color: rgb(113, 113, 113);
+      }
+    }
+    &:focus {
+      border-color: rgb(66, 66, 66);
+      & ~ .form__label {
+        color: rgb(66, 66, 66);
+      }
+    }
+    &:focus ~ .form__label,
+    &:not(:placeholder-shown) ~ .form__label {
+      /* top: -0.5em;
+      font-size: 0.8em; */
+      /* 使用 translate 开销更低 */
+      transform: translateY(-100%) scale(0.8);
+    }
+  }
+  .form__label {
+    color: rgb(186, 186, 186);
+    position: absolute;
+    top: 0.8em;
+    left: 1em;
+    cursor: text;
+    user-select: none;
+    background-color: white;
+    padding: 0 0.5em;
+    transition: transform 200ms ease-in;
+    transform-origin: top left;
+  }
+}
