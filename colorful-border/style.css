@@ -1,0 +1,62 @@
+:root {
+  font-family: rico_1, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 自定义变量，需要限定类型为角度 */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card {
+  margin: 200px auto;
+  padding: 2em;
+  width: 300px;
+  background-color: rgb(249, 239, 225);
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  &::after,
+  &::before {
+    --angle: 0deg;
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    /* 锥形渐变 */
+    background-image: conic-gradient(
+      from var(--angle),
+      transparent 50%,
+      rgb(156, 204, 101),
+      rgb(212, 225, 87),
+      rgb(255, 238, 88),
+      rgb(255, 202, 40),
+      rgb(255, 167, 38),
+      rgb(255, 202, 40),
+      rgb(255, 238, 88),
+      rgb(212, 225, 87),
+      rgb(156, 204, 101)
+    );
+
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 10px;
+    animation: 3s spin linear infinite;
+  }
+  &::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+  }
+  to {
+    --angle: 360deg;
+  }
+}
