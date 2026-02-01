@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --electric-border-color: #44ddff;
+}
+
+body {
+  background-color: oklch(0.145 0 0);
+  color: oklch(0.985 0 0);
+}
+
+.container {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+.card {
+  font: size 16px;
+  border-radius: 16px;
+  position: relative;
+}
+
+/* 所有层重叠在同一位置，大小与 card 一致 */
+.card__layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* 对指针事件隐形，用户的点击将穿透作用于下一个元素 */
+  pointer-events: none;
+}
+
+.card__layer--main {
+  border: 2px solid oklch(from var(--electric-border-color) l c h / 0.5);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px; /* 向外扩展 2px */
+    border: 2px solid var(--electric-border-color);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3 ease;
+  }
+}
+
+.card:hover .card__layer--main::after {
+  opacity: 1;
+  margin-top: -4px;
+  margin-left: -4px;
+  filter: url(#turbulent-displace);
+}
+
+.card__layer--glow-tight {
+  border: 2px solid oklch(from var(--electric-border-color) l c h / 0.6);
+  filter: blur(1px);
+}
+
+.card__layer--glow-wide {
+  border: 2px solid var(--electric-border-color);
+  filter: blur(4px);
+}
+
+.card__layer--overlay-primary {
+  background: linear-gradient(
+    -30deg,
+    white,
+    transparent 30%,
+    transparent 70%,
+    white
+  );
+  transform: scale(1.1);
+  filter: blur(16px);
+  mix-blend-mode: overlay;
+}
+
+.card__layer--overlay-secondary {
+  opacity: 0.5;
+  background: linear-gradient(
+    -30deg,
+    white,
+    transparent 30%,
+    transparent 70%,
+    white
+  );
+  transform: scale(1.1);
+  filter: blur(16px);
+  mix-blend-mode: overlay;
+}
+
+.card__layer--background-glow {
+  background: linear-gradient(
+    -30deg,
+    var(--electric-border-color),
+    transparent,
+    var(--electric-border-color)
+  );
+  filter: blur(32px);
+  transform: scale(1.1);
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 3em;
+}
+
+.card__sender {
+  opacity: 0.8;
+  text-align: end;
+  font-size: 1.2em;
+}
+
+.card__divider {
+  border: none; /* 自带的分割线是通过 border 实现的 */
+  height: 2px;
+  background-color: currentColor; /* 继承 */
+  opacity: 0.2;
+  width: 90%;
+  margin-inline: auto;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+}
